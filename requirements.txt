@@ -1,2 +1,3 @@
 astropy>=1.2.1
 gPhoton>=1.27.2
+numpy>=1.11.2
