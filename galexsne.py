@@ -7,12 +7,10 @@ from astropy import units as un
 from astropy.coordinates import SkyCoord as coord
 from astropy.time import Time as astrotime
 
-with open('ess-sne.csv', 'r') as f:
+with open('all-bright-sne.csv', 'r') as f:
     rows = list(csv.reader(f, delimiter=',', quotechar='"'))
 datas = []
 for ri, row in enumerate(rows[1:]):
-    if ri >= 10:
-        break
     ddate = row[1].split(',')[0]
     ra = row[2].split(',')[0]
     dec = row[3].split(',')[0]
@@ -22,7 +20,7 @@ for ri, row in enumerate(rows[1:]):
     dra, ddec = coo.ra.deg, coo.dec.deg
     gtime = astrotime(ddate.replace('/', '-')).unix - 315964800.
     tmin = gtime - 86400. * 365.0
-    tmax = gtime + 2.0 * 86400. * 365.0
+    tmax = gtime + 86400. * 365.0
     try:
         data = gPhoton.gAperture(
             band='NUV',
