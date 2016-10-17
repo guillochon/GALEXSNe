@@ -22,13 +22,16 @@ for ri, row in enumerate(rows[1:]):
     gtime = astrotime(ddate.replace('/', '-')).unix - 315964800.
     tmin = gtime - 86400. * 365.0
     tmax = gtime + 2.0 * 86400. * 365.0
-    data = gPhoton.gAperture(
-        band='NUV',
-        skypos=[dra, ddec],
-        radius=0.03,
-        annulus=[0.03, 0.04],
-        trange=[tmin, tmax],
-        stepsz=1000.)
+    try:
+        data = gPhoton.gAperture(
+            band='NUV',
+            skypos=[dra, ddec],
+            radius=0.03,
+            annulus=[0.03, 0.04],
+            trange=[tmin, tmax],
+            stepsz=1000.)
+    except:
+        data = None
     if data is not None:
         data['name'] = row[0]
         datas.append(data)
